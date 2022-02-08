@@ -13,7 +13,7 @@ Namespace: microsoft.graph
 
 Get the mail folder collection directly under the root folder of the signed-in user. The returned collection includes any [mail search folders](../resources/mailsearchfolder.md) directly under the root.
 
-By default, this operation does not return hidden folders. Use a query parameter _includeHiddenFolders_ to include them in the response.
+By default, this operation does not return hidden folders. Use a query parameter _includeHiddenFolders_ to include them in the response. This operation does not return all mail folders in a Mailbox only the folders that are child folders of the root folder, to return all mail folders in a Mailbox each child folder must be traversed separately see [List childFolders](../api/mailfolder-list-childfolders.md)
 
 ## Permissions
 One of the following permissions is required to call this API. To learn more, including how to choose permissions, see [Permissions](/graph/permissions-reference).
@@ -26,7 +26,7 @@ One of the following permissions is required to call this API. To learn more, in
 
 ## HTTP request
 
-To get all the mail folders in the specified user's mailbox, excluding those that are hidden:
+To get all the mail folders in the specified user's mailbox under the Mailbox Folder root, excluding those that are hidden:
 <!-- { "blockType": "ignored" } -->
 ```http
 GET /me/mailFolders
@@ -100,7 +100,7 @@ GET https://graph.microsoft.com/v1.0/me/mailFolders
 ---
 
 ##### Response
-Here is an example of the response which includes a **mailSearchFolder** that is a child folder under the Inbox. Note: The response object shown here may be truncated for brevity. All of the properties will be returned from an actual call.
+Here is an example of the response which includes a **mailSearchFolder** Note: The response object shown here may be truncated for brevity. All of the properties will be returned from an actual call.
 
 >**Note:** The response object shown here might be shortened for readability.
 <!-- {
@@ -203,6 +203,9 @@ Content-type: application/json
     ]
 }
 ```
+**Note:** If a collection exceeds the default page size (10 items), the **\@odata.nextLink** property is returned in the response to indicate more items are available and provide the request URL for the next page of items.
+
+You can control the page size through [optional query string parameters](/graph/query-parameters)
 
 ### Example 2: Include hidden folders in the signed-in user's mailbox
 
