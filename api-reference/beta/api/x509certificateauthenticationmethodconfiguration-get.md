@@ -1,7 +1,7 @@
 ---
 title: "Get x509CertificateAuthenticationMethodConfiguration"
 description: "Read the properties and relationships of a x509CertificateAuthenticationMethodConfiguration object."
-author: "charlenezheng"
+author: "vimrang"
 ms.localizationpriority: medium
 ms.prod: "identity-and-sign-in"
 doc_type: apiPageType
@@ -19,9 +19,9 @@ One of the following permissions is required to call this API. To learn more, in
 
 |Permission type|Permissions (from least to most privileged)|
 |:---|:---|
-|Delegated (work or school account)|Policy.ReadWrite.AuthenticationMethod|
+|Delegated (work or school account)|Policy.Read.All, Policy.ReadWrite.AuthenticationMethod|
 |Delegated (personal Microsoft account)|Not supported.|
-|Application|Not supported.|
+|Application|Policy.Read.All, Policy.ReadWrite.AuthenticationMethod|
 
 For delegated scenarios, the administrator needs one of the following [Azure AD roles](/azure/active-directory/users-groups-roles/directory-assign-admin-roles#available-roles):
 
@@ -57,6 +57,8 @@ If successful, this method returns a `200 OK` response code and a [x509Certifica
 ## Examples
 
 ### Request
+
+# [HTTP](#tab/http)
 <!-- {
   "blockType": "request",
   "name": "get_x509certificateauthenticationmethodconfiguration"
@@ -66,7 +68,36 @@ If successful, this method returns a `200 OK` response code and a [x509Certifica
 GET https://graph.microsoft.com/beta/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/x509Certificate
 ```
 
+# [C#](#tab/csharp)
+[!INCLUDE [sample-code](../includes/snippets/csharp/get-x509certificateauthenticationmethodconfiguration-csharp-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+# [JavaScript](#tab/javascript)
+[!INCLUDE [sample-code](../includes/snippets/javascript/get-x509certificateauthenticationmethodconfiguration-javascript-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+# [Java](#tab/java)
+[!INCLUDE [sample-code](../includes/snippets/java/get-x509certificateauthenticationmethodconfiguration-java-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+# [Go](#tab/go)
+[!INCLUDE [sample-code](../includes/snippets/go/get-x509certificateauthenticationmethodconfiguration-go-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+# [PowerShell](#tab/powershell)
+[!INCLUDE [sample-code](../includes/snippets/powershell/get-x509certificateauthenticationmethodconfiguration-powershell-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+# [PHP](#tab/php)
+[!INCLUDE [sample-code](../includes/snippets/php/get-x509certificateauthenticationmethodconfiguration-php-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+---
+
+
 ### Response
+
+The following response object shows an x509CertificateAuthenticationMethodConfiguration with its default configuration.
 >**Note:** The response object shown here might be shortened for readability.
 <!-- {
   "blockType": "response",
@@ -79,29 +110,34 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-	"@odata.type": "#microsoft.graph.x509CertificateAuthenticationMethodConfiguration",
-	"id": "X509Certificate",
-	"state": "disabled",
-	"certificateUserBindings": [{
-			"x509CertificateField": "PrincipalName",
-			"userProperty": "onPremisesUserPrincipalName",
-			"priority": 1
-		},
-		{
-			"x509CertificateField": "RFC822Name",
-			"userProperty": "userPrincipalName",
-			"priority": 2
-		}
-	],
-	"authenticationModeConfiguration": {
-		"x509CertificateAuthenticationDefaultMode": "x509CertificateSingleFactor",
-		"rules": []
-	},
-	"includeTargets": [{
-		"targetType": "group",
-		"id": "all_users",
-		"isRegistrationRequired": false
-	}]
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#authenticationMethodConfigurations/$entity",
+    "@odata.type": "#microsoft.graph.x509CertificateAuthenticationMethodConfiguration",
+    "id": "X509Certificate",
+    "state": "disabled",
+    "certificateUserBindings": [
+        {
+            "x509CertificateField": "PrincipalName",
+            "userProperty": "onPremisesUserPrincipalName",
+            "priority": 1
+        },
+        {
+            "x509CertificateField": "RFC822Name",
+            "userProperty": "userPrincipalName",
+            "priority": 2
+        }
+    ],
+    "authenticationModeConfiguration": {
+        "x509CertificateAuthenticationDefaultMode": "x509CertificateSingleFactor",
+        "rules": []
+    },
+    "includeTargets": [
+        {
+            "targetType": "group",
+            "id": "all_users",
+            "isRegistrationRequired": false
+        }
+    ],
+    "excludeTargets": []
 }
 ```
 
